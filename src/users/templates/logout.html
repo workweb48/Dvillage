@@ -1,0 +1,21 @@
+{% extends 'base.html'%}
+
+
+{% block content %}
+
+<div style="width: 40%;
+                   margin: 50px auto;
+                   text-align: right;
+                   border: 1px solid #ccc;
+                   border-radius: 10px;
+                   padding: 15px;
+                   ">
+    <h2 class="alert alert-success">لقد تم تسجيل خروجك بنجاح</h2>
+    <div class="border-top pt-3">
+        <small class="text-muted">
+            <a href="{% url 'login' %}">تسجيل الدخول مرة اخرى</a>
+        </small>
+    </div>
+    </div>
+
+{%endblock%}
