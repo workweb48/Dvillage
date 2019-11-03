@@ -11,136 +11,95 @@ from django.db.models import Q
 from django.contrib.messages.views import SuccessMessageMixin
 
 
-# # عرض صفحة المواضيع
-# def base(request,id):
-#     topic = get_object_or_404(Topic, pk=id)
-#     # boards = Board.objects.all()
-#     Topic_Advs = Topic_Advertising.objects.all()
-#     topics_list = Topic.objects.filter(created_by=topic.created_by.id)
-#
-#     context = {
-#         # 'title':'قرية المصممين | الرئيسية',
-#         # 'a_boards':boards,
-#         'Topic_Advs':Topic_Advs,
-#         'topics_list': topics_list
-#     }
-#     return render(request,'base.html',context)
 
 
 
 # # عرض صفحة المواضيع
 def boards_topic(request, id):
-    Slide_Advs = Slide_Advertising.objects.all()
-    Topic_Advs = Topic_Advertising.objects.all()
 
-    a_boards = Board.objects.filter(active=True)
-    board = get_object_or_404(Board, pk=id)
-    board_list = board.topics.filter(active=True)
-
-    query = request.GET.get('q')
-    if query:
-        board_list = board_list.filter(
-            Q(title__icontains=query) |
-            Q(board__name__icontains=query) |
-            Q(created_by__first_name__icontains=query) |
-            Q(created_by__last_name__icontains=query)
-        ).distinct()
-
-    paginator = Paginator(board_list, 10)
-    page = request.GET.get('page')
     try:
-        board_list = paginator.page(page)
-    except PageNotAnInteger:
-        board_list = paginator.page(1)
+        Slide_Advs = Slide_Advertising.objects.all()
+        Topic_Advs = Topic_Advertising.objects.all()
 
-    except EmptyPage:
-        board_list = paginator.page(Paginator.num_page)
+        a_boards = Board.objects.filter(active=True)
+        board = get_object_or_404(Board, pk=id)
+        board_list = board.topics.filter(active=True)
 
-    context = {
+        query = request.GET.get('q')
+        if query:
+            board_list = board_list.filter(
+                Q(title__icontains=query) |
+                Q(board__name__icontains=query) |
+                Q(created_by__first_name__icontains=query) |
+                Q(created_by__last_name__icontains=query)
+            ).distinct()
 
-        'board':board,
-        'board_list': board_list,
-        'page': page,
+        paginator = Paginator(board_list, 12)
+        page = request.GET.get('page')
+        try:
+            board_list = paginator.page(page)
+        except PageNotAnInteger:
+            board_list = paginator.page(1)
 
+        except EmptyPage:
+            board_list = paginator.page(Paginator.num_page)
 
-        'a_boards': a_boards,
-        'Slide_Advs':Slide_Advs,
-        'Topic_Advs':Topic_Advs,
-    }
+        context = {
 
-    return render(request, 'topics.html',context)
+            'board': board,
+            'board_list': board_list,
+            'page': page,
 
+            'a_boards': a_boards,
+            'Slide_Advs': Slide_Advs,
+            'Topic_Advs': Topic_Advs,
+        }
 
+        return render(request, 'topics.html', context)
 
-# def Board_list(request):
-#     board= Board.objects.order_by('id')
-#     topics = Topic.objects.filter('board')
-#
-#     paginator = Paginator(topics, 3)
-#     page = request.GET.get('page')
-#
-#     page = paginator.get_page(page)
-#     try:
-#         topics = paginator.page(page)
-#     except PageNotAnInteger:
-#         topics = paginator.page(1)
-#
-#     except EmptyPage:
-#         topics = paginator.page(Paginator.num_pages)
-#
-#     context = {
-#         'board': board,
-#         'topics': topics,
-#         'page': page,
-#     }
-#
-#     return render(request, 'board_list.html', context)
-
-
-
-
-
-
-
-
-
-
+    except:
+        return redirect('error')
 
 
 
 #صفحة جميع الاعمال
 def top_list(request):
-    Slide_Advs = Slide_Advertising.objects.all()
-    Topic_Advs = Topic_Advertising.objects.all()
 
-    a_boards=Board.objects.filter(active=True)
-    topics = Topic.objects.filter(active=True)
-
-    query=request.GET.get('q')
-    if query :
-        topics=topics.filter(
-            Q(title__icontains=query)|
-            Q(board__name__icontains=query)|
-            Q(created_by__first_name__icontains=query)|
-            Q(created_by__last_name__icontains=query)
-             ).distinct()
-    paginator = Paginator(topics, 12)
-    page = request.GET.get('page')
     try:
-        topics = paginator.page(page)
-    except PageNotAnInteger:
-        topics = paginator.page(1)
+        Slide_Advs = Slide_Advertising.objects.all()
+        Topic_Advs = Topic_Advertising.objects.all()
 
-    except EmptyPage:
-        topics = paginator.page(Paginator.num_page)
-    context = {
-        'page': page,
-        'topics':topics,
-        'a_boards':a_boards,
-        'Slide_Advs': Slide_Advs,
-        'Topic_Advs': Topic_Advs,
-    }
-    return render(request, 'index.html',context)
+        a_boards = Board.objects.filter(active=True)
+        topics = Topic.objects.filter(active=True)
+
+        query = request.GET.get('q')
+        if query:
+            topics = topics.filter(
+                Q(title__icontains=query) |
+                Q(board__name__icontains=query) |
+                Q(created_by__first_name__icontains=query) |
+                Q(created_by__last_name__icontains=query)
+            ).distinct()
+        paginator = Paginator(topics, 12)
+        page = request.GET.get('page')
+        try:
+            topics = paginator.page(page)
+        except PageNotAnInteger:
+            topics = paginator.page(1)
+
+        except EmptyPage:
+            topics = paginator.page(Paginator.num_page)
+        context = {
+            'page': page,
+            'topics': topics,
+            'a_boards': a_boards,
+            'Slide_Advs': Slide_Advs,
+            'Topic_Advs': Topic_Advs,
+        }
+        return render(request, 'index.html', context)
+    except:
+        return render(request, 'error.html')
+
 
 
 
@@ -164,61 +123,73 @@ def Up_imge(request):
 
 # لاظهار تفاصيل العمل
 def topic_detail(request, id,**kwargs):
-    topic = get_object_or_404(Topic, pk=id)
-    topics = Topic.objects.filter(created_by=topic.created_by.id)
-    topics_list = Topic.objects.filter(created_by=topic.created_by.id)
-    a_boards = Board.objects.filter(active=True)
 
-    paginator = Paginator(topics_list, 12)
-    page = request.GET.get('page')
     try:
-        topics_list = paginator.page(page)
-    except PageNotAnInteger:
-        topics_list = paginator.page(1)
+        topic = get_object_or_404(Topic, pk=id)
+        topics = Topic.objects.filter(created_by=topic.created_by.id)
+        topics_list = Topic.objects.filter(created_by=topic.created_by.id)
+        a_boards = Board.objects.filter(active=True)
 
-    except EmptyPage:
-        topics_list = paginator.page(Paginator.num_page)
+        paginator = Paginator(topics_list, 6)
+        page = request.GET.get('page')
+        try:
+            topics_list = paginator.page(page)
+        except PageNotAnInteger:
+            topics_list = paginator.page(1)
 
-    context = {
-        'title': topic,
-        'topic':topic,
-        'a_boards': a_boards,
-        'topics': topics,
-        'topics_list':topics_list,
-        'page': page,
-     }
+        except EmptyPage:
+            topics_list = paginator.page(Paginator.num_page)
 
-    return render(request, 'detail.html', context)
+        context = {
+            'title': topic,
+            'topic': topic,
+            'a_boards': a_boards,
+            'topics': topics,
+            'topics_list': topics_list,
+            'page': page,
+        }
+
+        return render(request, 'detail.html', context)
+    except:
+        return render(request, 'error.html')
+
+
 
 
 
 #لعرض جميع أعمال المصمم
 def designer_works(request, id,**kwargs):
-    topic = get_object_or_404(Topic, pk=id)
-    topics = Topic.objects.filter(created_by=topic.created_by.id)
-    topics_list = Topic.objects.filter(created_by=topic.created_by.id)
-    a_boards = Board.objects.filter(active=True)
-    title1=topic.created_by
-
-    paginator = Paginator(topics_list, 8)
-    page = request.GET.get('page')
     try:
-        topics_list = paginator.page(page)
-    except PageNotAnInteger:
-        topics_list = paginator.page(1)
+        topic = get_object_or_404(Topic, pk=id)
+        topics = Topic.objects.filter(created_by=topic.created_by.id)
+        topics_list = Topic.objects.filter(created_by=topic.created_by.id)
+        a_boards = Board.objects.filter(active=True)
+        title1 = topic.created_by
 
-    except EmptyPage:
-        topics_list = paginator.page(Paginator.num_page)
-    context = {
-        'title': title1,
-        'a_boards': a_boards,
-        'posts': topics,
-        'topics_list': topics_list,
-        'page': page,
+        paginator = Paginator(topics_list, 6)
+        page = request.GET.get('page')
+        try:
+            topics_list = paginator.page(page)
+        except PageNotAnInteger:
+            topics_list = paginator.page(1)
 
-     }
+        except EmptyPage:
+            topics_list = paginator.page(Paginator.num_page)
+        context = {
+            'title': title1,
+            'a_boards': a_boards,
+            'posts': topics,
+            'topics_list': topics_list,
+            'page': page,
 
-    return render(request, 'user_topics.html', context)
+        }
+
+        return render(request, 'user_topics.html', context)
+    except:
+        return render(request, 'error.html')
+
+
+
 
 
 
@@ -235,22 +206,25 @@ def designer_works(request, id,**kwargs):
 class TopicCreate(LoginRequiredMixin,SuccessMessageMixin,CreateView):
     model = Topic
     template_name = 'topic_form.html'
-    fields = ['title','img_url','board']
-    success_message=( 'تم انشاء الموضوع بنجاح')
+    form_class = Creat_form
+    success_message = ('تم انشاء الموضوع بنجاح')
+
     # success_url = '/'
 
     def form_valid(self, form):
         form.instance.created_by = self.request.user
         return super().form_valid(form)
 
+
+
     # لتحديث الموضوع
 class TopicUpdate(UserPassesTestMixin, LoginRequiredMixin,SuccessMessageMixin, UpdateView):
 
     model = Topic
     template_name = 'update.html'
+    form_class = Creat_form
     success_message=('تم تحديث الموضوع بنجاح')
 
-    fields = ['title', 'img_url', 'board']
 
     def form_valid(self, form):
         form.instance.created_by = self.request.user
@@ -262,6 +236,13 @@ class TopicUpdate(UserPassesTestMixin, LoginRequiredMixin,SuccessMessageMixin, U
             return True
         else:
             return False
+
+    # def save(self, *args, **kwargs):
+    #     if self.created_dt.now() != 'created_dt':
+    #         self.created_dt = timezone.now()
+    #     return super(TopicUpdate, self).save(*args, **kwargs)
+
+
 
 
 # لحذف الموضوع
@@ -277,3 +258,6 @@ class TopicDelete(UserPassesTestMixin, LoginRequiredMixin, DeleteView):
         else:
             return False
 
+
+def error_page(request):
+    return render(request, 'error.html')

@@ -19,10 +19,12 @@ class Board(models.Model):
 
 
 class Topic(models.Model):
-    title = models.CharField(max_length=51)
+    title = models.CharField(max_length=70)
+    description = models.CharField(max_length=500,default="لايوجد وصف")
     created_by = models.ForeignKey(User, related_name='topics',on_delete=models.CASCADE,default=True)
     board = models.ForeignKey(Board, related_name='topics',on_delete=models.CASCADE)
     created_dt = models.DateTimeField(default=timezone.now)
+    # updated_at = models.DateTimeField(auto_now=True)
     active = models.BooleanField(default=True)
     img_url =models.URLField(max_length=250)
 

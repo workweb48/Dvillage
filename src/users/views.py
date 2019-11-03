@@ -30,7 +30,7 @@ def register(request):
 def profile(request):
     topics = Topic.objects.filter(created_by=request.user)
     topics_list = Topic.objects.filter(created_by=request.user)
-    paginator = Paginator(topics_list, 12)
+    paginator = Paginator(topics_list, 6)
     page = request.GET.get('page')
     try:
         topics_list = paginator.page(page)

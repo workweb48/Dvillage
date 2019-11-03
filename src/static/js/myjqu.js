@@ -2,11 +2,20 @@ $(document).ready(function(){
     
     'use strict';
     
-$('html').niceScroll(); 
+    $('html').niceScroll(); 
 
-$('.zoomify').zoomify();
+    $('.zoomify').zoomify();
+    
+    
 
 
 
-});
+             });
 
+$(window).on('load',function(){
+   
+    $("body").css("overflow","auto");
+    $('.loading-ov ').fadeOut(200);
+
+
+        });

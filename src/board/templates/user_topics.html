@@ -85,9 +85,11 @@
                              {{topic.created_by.first_name}} {{topic.created_by.last_name}}
                                </a>
                           </p>
-                            
 
-                    <p class="card-text text-center font-weight-bold text-success pb-2"> {{topic.created_by.profile.mobile}}&emsp;<i style="font-size: 25px;" class="fab fa-whatsapp"></i></p>
+                            <a class="text-secondary" href="https://api.whatsapp.com/send?phone={{topic.created_by.profile.mobile}}" target="_blank" >
+                            <p style="font-size: 18px;color: #080;" class="card-text ">{{topic.created_by.profile.mobile}} <i style="font-size: 18px " class="fab fa-whatsapp"></i></p></a>
+
+
                         </div>
                          <div class="card-footer">
                           <small class="text-muted">{{topic.created_dt}}</small>

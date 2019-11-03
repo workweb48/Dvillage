@@ -42,7 +42,7 @@
                     <a class="nav-link" href="{% url 'index'  %}">الصفحة الرئيسية <span class="sr-only">(current)</span></a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="{% url 'up_imge'  %}">رفع الصور</a>
+                    <a class="nav-link" href="{% url 'up_imge'  %}">مواقع رفع الصور</a>
                   </li>
                   <li class="nav-item dropdown ">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -118,17 +118,17 @@
             <div class="card-header adv-lg-scn  " style="height: 50%;"> 
                 <img src="{{to_advs.AD_profile.image.url}}" class="card-img-top w-25" alt="...">
 
-                <h5 class=" px-2 ">  <a  href="{{to_advs.url_adv}}"> {{to_advs.title}} </a></h5>
+                <h5 class=" px-2 ">  <a class="text-decoration-none " href="{{to_advs.url_adv}}"> {{to_advs.title}} </a></h5>
 
             </div>
             <div class="card-body text-secondary ">
+            <p class="text-muted">{{to_advs.description}}</p>
+            <a class="text-secondary" href="https://api.whatsapp.com/send?phone={{to_advs.AD_profile.mobile}}" target="_blank" >
+            <p style="font-size: 18px;color: #080;" class="card-text ">{{to_advs.AD_profile.mobile}} <i style="font-size: 18px " class="fab fa-whatsapp"></i></p></a>
+                           
+                
+            
 
-            <a href="https://api.whatsapp.com/send?phone={{to_advs.AD_profile.mobile}}" target="_blank">
-            <p class="card-text text-center font-weight-bold text-success  ">
-                {{to_advs.AD_profile.mobile}}
-                <i style="" class="fab pt-2 fa-2x fa-whatsapp"></i>
-             </p>
-                </a>
             </div>
         </div>
                  
@@ -154,8 +154,8 @@
        <!--  start footer -->
   <footer class=" d-none d-md-block">
       <div class="footer-lg text-center ">
-        <p> 
-           جميع الحقوق محفوظة : Mas'hom Aljedani :
+        <p>
+            Design by : Mas'hom Aljedani  [ 2019 ]
           </p>
           </div>
       
@@ -180,11 +180,24 @@
       
       
       
-      
-      
-      
-      
-      
+<!--      start loading-->
+   <section class="loading-ov">   
+<div class="sk-fading-circle">
+  <div class="sk-circle1 sk-circle"></div>
+  <div class="sk-circle2 sk-circle"></div>
+  <div class="sk-circle3 sk-circle"></div>
+  <div class="sk-circle4 sk-circle"></div>
+  <div class="sk-circle5 sk-circle"></div>
+  <div class="sk-circle6 sk-circle"></div>
+  <div class="sk-circle7 sk-circle"></div>
+  <div class="sk-circle8 sk-circle"></div>
+  <div class="sk-circle9 sk-circle"></div>
+  <div class="sk-circle10 sk-circle"></div>
+  <div class="sk-circle11 sk-circle"></div>
+  <div class="sk-circle12 sk-circle"></div>
+</div>
+      </section>
+      <!--      end loading-->
 
       
 

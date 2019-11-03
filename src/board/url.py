@@ -6,6 +6,7 @@ from . import views
 urlpatterns = [
 
     path('', views.top_list, name='index'),
+    path('error/', views.error_page, name='error'),
     # path('<int:id>/', views.base, name='base'),
 
     path('boards/<int:id>/', views.boards_topic, name='boards_topic'),
