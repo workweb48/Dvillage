@@ -7,7 +7,7 @@ from PIL import Image
 class Profile(models.Model):
     image = models.ImageField(default='default.jpg', upload_to='images')
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    mobile=models.IntegerField()
+    mobile=models.IntegerField(null=True)
     # description = models.CharField(max_length=50, unique=True)
     cv_img_url = models.URLField(max_length=250)
     active = models.BooleanField(default=True)
