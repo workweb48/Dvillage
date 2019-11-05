@@ -82,8 +82,8 @@ WSGI_APPLICATION = 'myweb.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'desdb',
-        'USER': 'mas_admin',
+        'NAME': 'desvdb',
+        'USER': 'mas48_admin',
         'PASSWORD': 'al9j7d2rty',
         'HOST': 'localhost',
         'PORT': '',
